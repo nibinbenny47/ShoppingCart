@@ -14,6 +14,7 @@ public partial class User_Default : System.Web.UI.Page
     string connectionString = WebConfigurationManager.ConnectionStrings["constr"].ConnectionString;
     SqlConnection con;
     SqlCommand cmd;
+    public static int id;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -109,16 +110,51 @@ public partial class User_Default : System.Web.UI.Page
     }
 
 
-
+    //when clicks on an item in dropdownlist the datatable appears
     protected void ddlMenItem_SelectedIndexChanged(object sender, EventArgs e)
     {
         MultiView1.ActiveViewIndex = 0;
         fillMenDatalist();
     }
-
+    //when clicks on an item in dropdownlist the datatable appears
     protected void ddlWomenItem_SelectedIndexChanged(object sender, EventArgs e)
     {
         MultiView1.ActiveViewIndex = 1;
         fillWomenDatalist();
     }
+
+
+    //protected void dtlistWomenItems_ItemCommand(object source, DataListCommandEventArgs e)
+    //{
+
+    //}
+
+    protected void fillRepeater()
+    {
+        connection();
+
+        string product = Session["pid"].ToString();
+        cmd = new SqlCommand("sp_Homepage", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@status", 4);
+        cmd.Parameters.AddWithValue("@productid", product);
+        DataTable dt = new DataTable();
+        SqlDataAdapter adp = new SqlDataAdapter(cmd);
+        adp.Fill(dt);
+        rptrAddToCart.DataSource = dt;
+        rptrAddToCart.DataBind();
+
+    }
+    protected void dtlistMenItems_ItemCommand(object source, DataListCommandEventArgs e)
+    {
+        id = Convert.ToInt32(e.CommandArgument);
+        Session["pid"] = id;
+
+        if (e.CommandName == "AddToCart")
+        {
+            //MultiView1.ActiveViewIndex = 2;
+            fillRepeater();
+        }
+    }
+   
 }

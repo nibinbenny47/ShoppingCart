@@ -9,7 +9,7 @@
     <%--<asp:Button  runat="server" ID="btnSave" OnClick="btnSave_Click"  Text="show"/>--%>
       <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
                     <asp:View ID="View1" runat="server">
-                        <asp:DataList runat="server" ID="dtlistMenItems" RepeatColumns="3">
+                        <asp:DataList runat="server" ID="dtlistMenItems" RepeatColumns="3" OnItemCommand="dtlistMenItems_ItemCommand">
                             <ItemTemplate>
                                 <table class="style1">
                                 <tr>
@@ -24,6 +24,12 @@
                                     <tr>
                                         <td>
                                         <%#Eval("product_description")%>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                      
+                                            <asp:LinkButton ID="lkbtnAddToCart" runat="server" CommandArgument='<%# Eval("product_id") %>' CommandName="AddToCart">Addtocart</asp:LinkButton>
                                         </td>
                                     </tr>
                                      
@@ -49,27 +55,13 @@
                                         <%#Eval("product_description")%>
                                         </td>
                                     </tr>
-                                     
-                                        </table>
-                            </ItemTemplate>
-                      </asp:DataList>
-                </asp:View>
-              <%-- <asp:View ID="View3" runat="server">
-                      <asp:DataList runat="server" ID="dtlistSaree">
-                          <ItemTemplate>
-                                <table class="style1">
-                                <tr>
-                                    <td><img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" />;</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%#Eval("product_price")%>;
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td>
-                                        <%#Eval("product_description")%>;
+                                          <%--  
+                                            <asp:LinkButton ID="lkbtnAddtoCart" runat="server" CommandName="AddToCart" CommandArgument=" <%#Eval("product_id")%>">
+                                                ADDTOCART
+                                            </asp:LinkButton>--%>
+                                       <%--<asp:LinkButton ID="lkbtnAddtoCart" runat="server" CommandArgument="<%#Eval("product_id") %>" CommandName="AddToCart" Text="Addtocart"></asp:LinkButton>--%>
                                         </td>
                                     </tr>
                                      
@@ -77,29 +69,46 @@
                             </ItemTemplate>
                       </asp:DataList>
                 </asp:View>
-               <asp:View ID="View4" runat="server">
-                      <asp:DataList runat="server" ID="dtlistChuridhar">
-                          <ItemTemplate>
-                                <table class="style1">
-                                <tr>
-                                    <td><img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" />;</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%#Eval("product_price")%>;
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                        <%#Eval("product_description")%>;
-                                        </td>
-                                    </tr>
-                                     
-                                        </table>
-                            </ItemTemplate>
-                      </asp:DataList>
-                </asp:View>--%>
+              <asp:View ID="View3" runat="server">
+                  <asp:Repeater runat="server" ID="rptrAddToCart">
+                      <HeaderTemplate>
+                          <table>
+                              <tr>
+                                  <th>Pic</th>
+                                  <th>Descri</th>
+                                  <th>Qnty</th>
+                                  <th>Total</th>
+                              </tr>
+
+                         
+                      </HeaderTemplate>
+                      <ItemTemplate>
+                          <table>
+                              <tr>
+                                  <td>
+                                      <img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" />
+                
+                                  </td>
+                                  <td>
+                                        <%#Eval("product_description")%>
+
+                                  </td>
+                                  <td>
+                                      <asp:TextBox ID="txtQuantity" runat="server"></asp:TextBox>
+                                  </td>
+                                  <td>
+                                      <asp:TextBox ID="txtTotal" runat="server"></asp:TextBox>
+
+                                  </td>
+                              </tr>
+                          </table>
+                      </ItemTemplate>
+                      <FooterTemplate>
+                           </table>
+                      </FooterTemplate>
+                      
+                  </asp:Repeater>
+              </asp:View>
               </asp:MultiView>
 </asp:Content>
 
