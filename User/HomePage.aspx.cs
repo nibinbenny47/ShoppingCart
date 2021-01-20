@@ -19,7 +19,7 @@ public partial class User_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            
+
             fillWomenItem();
             fillMenItem();
 
@@ -150,11 +150,11 @@ public partial class User_Default : System.Web.UI.Page
         id = Convert.ToInt32(e.CommandArgument);
         Session["pid"] = id;
 
-        if (e.CommandName == "AddToCart")
+        if (e.CommandName == "viewProduct")
         {
-            //MultiView1.ActiveViewIndex = 2;
+            MultiView1.ActiveViewIndex = 2;
             fillRepeater();
         }
     }
-   
+
 }

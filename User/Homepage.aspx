@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
       
-    <asp:DropDownList runat="server" ID="ddlMenItem" OnSelectedIndexChanged="ddlMenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+     <asp:DropDownList runat="server" ID="ddlMenItem" OnSelectedIndexChanged="ddlMenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
     <asp:DropDownList runat="server" ID="ddlWomenItem" OnSelectedIndexChanged="ddlWomenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
     <%--<asp:Button  runat="server" ID="btnSave" OnClick="btnSave_Click"  Text="show"/>--%>
       <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
@@ -13,7 +13,10 @@
                             <ItemTemplate>
                                 <table class="style1">
                                 <tr>
-                                    <td><img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" /></td>
+                                    <td><asp:LinkButton ID="lkbtnViewProduct" runat="server" CommandArgument='<%# Eval("product_id") %>' CommandName="viewProduct">
+                                        <img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" />
+                                        </asp:LinkButton>
+                                        </td>
                                     
                                 </tr>
                                 <tr>
@@ -26,12 +29,12 @@
                                         <%#Eval("product_description")%>
                                         </td>
                                     </tr>
-                                     <tr>
-                                        <td>
+                                     <%--<tr>
+                                        <td>--%>
                                       
-                                            <asp:LinkButton ID="lkbtnAddToCart" runat="server" CommandArgument='<%# Eval("product_id") %>' CommandName="AddToCart">Addtocart</asp:LinkButton>
-                                        </td>
-                                    </tr>
+                                            <%--<asp:LinkButton ID="lkbtnAddToCart" runat="server" CommandArgument='<%# Eval("product_id") %>' CommandName="AddToCart"><%#Eval("product_photo")%></asp:LinkButton>--%>
+                                      <%--  </td>
+                                    </tr>--%>
                                      
                                         </table>
                             </ItemTemplate>
@@ -71,17 +74,7 @@
                 </asp:View>
               <asp:View ID="View3" runat="server">
                   <asp:Repeater runat="server" ID="rptrAddToCart">
-                      <HeaderTemplate>
-                          <table>
-                              <tr>
-                                  <th>Pic</th>
-                                  <th>Descri</th>
-                                  <th>Qnty</th>
-                                  <th>Total</th>
-                              </tr>
-
-                         
-                      </HeaderTemplate>
+                      
                       <ItemTemplate>
                           <table>
                               <tr>
@@ -101,11 +94,14 @@
 
                                   </td>
                               </tr>
+                              <tr>
+                                  <td>
+                                      <asp:LinkButton runat="server" ID="lkbtnAddToCart" Text="ADD TO CART"></asp:LinkButton>
+                                  </td>
+                              </tr>
                           </table>
                       </ItemTemplate>
-                      <FooterTemplate>
-                           </table>
-                      </FooterTemplate>
+                      
                       
                   </asp:Repeater>
               </asp:View>
