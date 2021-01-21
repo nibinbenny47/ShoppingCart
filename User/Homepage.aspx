@@ -102,7 +102,8 @@
                               </tr>
                               <tr>
                                   <td>
-                                      <asp:LinkButton runat="server" ID="lkbtnAddToCart" Text="ADD TO CART" CommandArgument='<%#Eval("product_id") %>' CommandName="AddToCart"></asp:LinkButton>
+                                      <asp:Button ID="btnAddToCart" runat="server"  Text="ADD TO CART" OnClick="btnAddToCart_Click" />
+                                      <%--<asp:LinkButton runat="server" ID="lkbtnAddToCart" Text="ADD TO CART" CommandArgument='<%#Eval("product_id") %>' CommandName="AddToCart"></asp:LinkButton>--%>
                                   </td>
                               </tr>
                           </table>
@@ -111,13 +112,7 @@
                       
                   </asp:Repeater>
               </asp:View>
-               <asp:View ID="View4" runat="server">
-                   <asp:Repeater ID="rptrAddToCart" runat="server">
-
-
-                   </asp:Repeater>
-
-               </asp:View>
+               
               </asp:MultiView>
 </asp:Content>
 

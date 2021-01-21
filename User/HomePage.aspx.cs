@@ -172,6 +172,38 @@ public partial class User_Default : System.Web.UI.Page
     {
 
     }
+
+    protected void btnAddToCart_Click(object sender, EventArgs e)
+    {
+
+        connection();
+        //Reference the Repeater Item using Button.
+        RepeaterItem item = (sender as Button).NamingContainer as RepeaterItem;
+        string qnty = (item.FindControl("txtQuantity") as TextBox).Text;
+        string total = (item.FindControl("txtTotal") as TextBox).Text;
+        string description = (item.FindControl("hdnDescription") as HiddenField).ToString();
+
+        string photo = (item.FindControl("hdnPhoto") as HiddenField).ToString();
+
+
+
+
+        string userid = Session["uid"].ToString();
+        string product = Session["pid"].ToString();
+        cmd = new SqlCommand("sp_Homepage", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@status", 5);
+        cmd.Parameters.AddWithValue("@product_id", product);
+        cmd.Parameters.AddWithValue("@cart_quantity", qnty);
+        cmd.Parameters.AddWithValue("@user_id", userid);
+
+        cmd.Parameters.AddWithValue("@cart_total", total);
+
+        cmd.Parameters.AddWithValue("@payment_status", 0);
+        cmd.ExecuteNonQuery();
+
+
+    }
 }
 
 
