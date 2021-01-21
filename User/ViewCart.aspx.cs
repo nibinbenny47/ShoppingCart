@@ -20,6 +20,7 @@ public partial class User_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+           
             showCart();
         }
     }
@@ -28,6 +29,7 @@ public partial class User_Default : System.Web.UI.Page
         con = new SqlConnection(connectionString);
         con.Open();
     }
+   
     protected void showCart()
     {
         connection();
@@ -42,12 +44,34 @@ public partial class User_Default : System.Web.UI.Page
         adp.Fill(dt);
         rptrViewCart.DataSource = dt;
         rptrViewCart.DataBind();
+        //find grandtotal
+        findGrandTotal();
 
 
 
     }
+    protected void findGrandTotal()
+    {
+        connection();
 
-    protected void rptrViewCart_ItemCommand(object source, RepeaterCommandEventArgs e)
+        string userid = Session["uid"].ToString();
+        cmd = new SqlCommand("sp_ViewCart", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@status", 3);
+        cmd.Parameters.AddWithValue("@user_id", userid);
+        DataTable dt = new DataTable();
+        SqlDataAdapter adp = new SqlDataAdapter(cmd);
+        adp.Fill(dt);
+       if(dt.Rows.Count > 0)
+        {
+            lblGrandTotal.Text = dt.Rows[0]["grandtotal"].ToString();
+        }
+
+
+
+        }
+
+        protected void rptrViewCart_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         id = Convert.ToInt32(e.CommandArgument);
         if(e.CommandName == "deleteFromCart")
@@ -65,4 +89,5 @@ public partial class User_Default : System.Web.UI.Page
 
         }
     }
+    
 }

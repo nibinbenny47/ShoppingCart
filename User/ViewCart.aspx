@@ -37,9 +37,22 @@
                                       <asp:LinkButton ID="lkbtnBookNow" runat="server" CommandName="BookNow" CommandArgument='<%#Eval("cart_id") %>'>Book Now</asp:LinkButton>
                                   </td>
                               </tr>
+               
                 
-                </table>
+                
+               
         </ItemTemplate>
+        <FooterTemplate>
+          
+            <tr>
+                    <td>
+                         <asp:LinkButton ID="lkbtnBookAllProducts" runat="server" CommandName="BookNow" CommandArgument='<%#Eval("user_id") %>'>Book all products</asp:LinkButton>
+                    </td>
+                </tr>
+             </table>
+        </FooterTemplate>
+       
     </asp:Repeater>
+     Grand Total: <asp:Label ID="lblGrandTotal" runat="server"></asp:Label>
 </asp:Content>
 

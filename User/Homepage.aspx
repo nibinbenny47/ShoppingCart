@@ -6,7 +6,7 @@
       
      <asp:DropDownList runat="server" ID="ddlMenItem" OnSelectedIndexChanged="ddlMenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
     <asp:DropDownList runat="server" ID="ddlWomenItem" OnSelectedIndexChanged="ddlWomenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-    <asp:HyperLink ID="hplinkViewCart" runat="server" NavigateUrl="~/User/ViewCart.aspx" Text="Download" ></asp:HyperLink>
+    <asp:HyperLink ID="hplinkViewCart" runat="server" NavigateUrl="~/User/ViewCart.aspx" Text="view cart" ></asp:HyperLink>
     <%--<asp:Button  runat="server" ID="btnSave" OnClick="btnSave_Click"  Text="show"/>--%>
       <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
                     <asp:View ID="View1" runat="server">
