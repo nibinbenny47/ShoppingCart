@@ -124,10 +124,7 @@ public partial class User_Default : System.Web.UI.Page
     }
 
 
-    //protected void dtlistWomenItems_ItemCommand(object source, DataListCommandEventArgs e)
-    //{
-
-    //}
+    
 
     protected void fillRepeater()
     {
@@ -141,8 +138,8 @@ public partial class User_Default : System.Web.UI.Page
         DataTable dt = new DataTable();
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
         adp.Fill(dt);
-        rptrAddToCart.DataSource = dt;
-        rptrAddToCart.DataBind();
+        rptrViewProduct.DataSource = dt;
+        rptrViewProduct.DataBind();
 
     }
     protected void dtlistMenItems_ItemCommand(object source, DataListCommandEventArgs e)
@@ -157,4 +154,37 @@ public partial class User_Default : System.Web.UI.Page
         }
     }
 
+
+   
+        //calculating total 
+        protected void txtQuantity_TextChanged(object sender, EventArgs e)
+        {
+        TextBox tb1 = ((TextBox)(sender));
+        RepeaterItem rp1 = ((RepeaterItem)(tb1.NamingContainer));
+        TextBox tb2 = (TextBox)rp1.FindControl("txtTotal");
+        HiddenField hdn = (HiddenField)rp1.FindControl("hdnPrice");
+        int id = Convert.ToInt32(hdn.Value);
+        tb2.Text = Convert.ToString(Convert.ToDouble(tb1.Text) * id );
+
+
+    }
+    protected void rptrViewProduct_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -73,30 +73,36 @@
                       </asp:DataList>
                 </asp:View>
               <asp:View ID="View3" runat="server">
-                  <asp:Repeater runat="server" ID="rptrAddToCart">
+                  <asp:Repeater runat="server" ID="rptrViewProduct" OnItemCommand="rptrViewProduct_ItemCommand" >
                       
                       <ItemTemplate>
                           <table>
                               <tr>
                                   <td>
+                                       <asp:HiddenField ID="hdnPhoto" runat="server" Value='<%#Eval("product_photo")%>' />
                                       <img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" />
                 
                                   </td>
                                   <td>
+                                      <asp:HiddenField ID="hdnDescription" runat="server" Value='<%#Eval("product_description")%>' />
                                         <%#Eval("product_description")%>
 
                                   </td>
                                   <td>
-                                      <asp:TextBox ID="txtQuantity" runat="server"></asp:TextBox>
+                                      Quantity<asp:TextBox ID="txtQuantity" runat="server" OnTextChanged="txtQuantity_TextChanged" AutoPostBack="true" ></asp:TextBox>
                                   </td>
+                                  <%--<td><asp:Label runat="server" ID="lblPrice" Visible="false"></asp:Label></td>--%>
+                                 <td>
+                                     <asp:HiddenField runat="server" ID="hdnPrice" Value='<%#Eval("product_price")%>' />
+                                 </td>
                                   <td>
-                                      <asp:TextBox ID="txtTotal" runat="server"></asp:TextBox>
+                                      Total<asp:TextBox ID="txtTotal" runat="server" Text='<%#Eval("product_price")%>'  ></asp:TextBox>
 
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <asp:LinkButton runat="server" ID="lkbtnAddToCart" Text="ADD TO CART"></asp:LinkButton>
+                                      <asp:LinkButton runat="server" ID="lkbtnAddToCart" Text="ADD TO CART" CommandArgument='<%#Eval("product_id") %>' CommandName="AddToCart"></asp:LinkButton>
                                   </td>
                               </tr>
                           </table>
@@ -105,6 +111,13 @@
                       
                   </asp:Repeater>
               </asp:View>
+               <asp:View ID="View4" runat="server">
+                   <asp:Repeater ID="rptrAddToCart" runat="server">
+
+
+                   </asp:Repeater>
+
+               </asp:View>
               </asp:MultiView>
 </asp:Content>
 
