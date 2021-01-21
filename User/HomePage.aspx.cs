@@ -204,6 +204,18 @@ public partial class User_Default : System.Web.UI.Page
 
 
     }
+
+    protected void dtlistWomenItems_ItemCommand(object source, DataListCommandEventArgs e)
+    {
+        id = Convert.ToInt32(e.CommandArgument);
+        Session["pid"] = id;
+
+        if (e.CommandName == "viewProduct")
+        {
+            MultiView1.ActiveViewIndex = 2;
+            fillRepeater();
+        }
+    }
 }
 
 

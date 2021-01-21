@@ -6,6 +6,7 @@
       
      <asp:DropDownList runat="server" ID="ddlMenItem" OnSelectedIndexChanged="ddlMenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
     <asp:DropDownList runat="server" ID="ddlWomenItem" OnSelectedIndexChanged="ddlWomenItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+    <asp:HyperLink ID="hplinkViewCart" runat="server" NavigateUrl="~/User/ViewCart.aspx" Text="Download" ></asp:HyperLink>
     <%--<asp:Button  runat="server" ID="btnSave" OnClick="btnSave_Click"  Text="show"/>--%>
       <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
                     <asp:View ID="View1" runat="server">
@@ -41,11 +42,13 @@
                         </asp:DataList>
                         </asp:View>
                 <asp:View ID="View2" runat="server">
-                      <asp:DataList runat="server" ID="dtlistWomenItems" RepeatColumns="3">
+                      <asp:DataList runat="server" ID="dtlistWomenItems" RepeatColumns="3" OnItemCommand="dtlistWomenItems_ItemCommand">
                           <ItemTemplate>
                                 <table class="style1">
                                 <tr>
-                                    <td><img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" /></td>
+                                    <td><td><asp:LinkButton ID="lkbtnViewProduct" runat="server" CommandArgument='<%# Eval("product_id") %>' CommandName="viewProduct">
+                                        <img src="../Admin/Photos/<%#Eval("product_photo")%>" width="40" height="40" style="height: 113px; width: 159px" />
+                                        </asp:LinkButton></td>
                                     
                                 </tr>
                                 <tr>
